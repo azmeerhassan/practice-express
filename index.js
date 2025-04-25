@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
+app.set('view engine', 'pug')
 
-app.get('/', (req, res)=>{
-    res.send('Hello World!')
+app.get('/about', (req, res)=>{
+    res.render('about', {name: 'fahad'})
 })
-app.get('/uppercase/:theValue', (req, res)=>{res.send(req.params.theValue.toUpperCase())})
-app.listen(3000, ()=>{console.log("Server Started!");
+
+app.listen(3000, ()=>{console.log('Server Started');
 })
