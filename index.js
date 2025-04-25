@@ -4,6 +4,6 @@ const app = express()
 app.get('/', (req, res)=>{
     res.send('Hello World!')
 })
-
+app.get('/uppercase/:theValue', (req, res)=>{res.send(req.params.theValue.toUpperCase())})
 app.listen(3000, ()=>{console.log("Server Started!");
 })
