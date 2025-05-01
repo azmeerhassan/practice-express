@@ -1,22 +1,26 @@
 const express = require('express')
 const app = express()
+const users = require('./MOCK_DATA (1).json')
 
-app.use(express.json())
+app.get('/api/users', (req,res)=>{
+    return res.json(users)
+})
 
-app.post('/form',[
-    check('name').isLength({ min:3 }).trim().escape(),
-    check('email').isEmail().normalizeEmail(),
-    check('age').isNumeric().trim().escape()
-], (req, res)=>{
+app.post('/api/users', (req, res)=>{
+    return res.json({status: "pending"})
+})
 
-    const name = req.body.name
-    const email = req.body.email
-    const age = req.body.age
-
-    res.status(200).json({
-        message: 'Form submitted successfully',
-        data: { name, email, age }
-    })
+app.route('/api/users/:id')
+.get((req, res)=>{
+    const id = Number(req.params.id)
+    const user = users.find((user)=> user.id ===id)
+    return res.json(user)
+})
+.patch((req, res)=>{
+    return res.json({status: "pending"})
+})
+.delete((req, res)=>{
+    return res.json({status: "pending"})
 })
 
 app.listen(3000, ()=>console.log('Server Started')
